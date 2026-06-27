@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="id">
+ <head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informasi Akun Tes Pemetaan - SMP Negeri 1 Slogohimo</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(16px); } }
+        .dark-mode { --bg: #1a1a2e; --surface: #16213e; --text: #e0e0e0; --text-muted: #a0a0a0; }
+        .light-mode { --bg: #f5f7fa; --surface: #ffffff; --text: #1a1a1a; --text-muted: #666666; }
+        body { background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+        .surface-card { background: var(--surface); transition: background 0.3s; }
+        .text-muted-dynamic { color: var(--text-muted); }
+    </style>
+  <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: '#1565C0', accent: '#FFC107' } } }
+        }
+    </script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="light-mode min-h-screen flex flex-col"><!-- Header -->
+  <header data-template-id="header-section" class="canva-header bg-primary text-white py-6 px-4 fade-in">
+   <div class="max-w-4xl mx-auto text-center"><img data-template-id="school-logo" class="canva-image w-16 h-16 mx-auto mb-3 rounded-full object-cover" loading="lazy">
+    <h1 data-template-id="main-title" class="canva-text font-bold text-white"></h1>
+    <p data-template-id="subtitle-1" class="canva-text text-blue-100 mt-1"></p>
+    <p data-template-id="subtitle-2" class="canva-text text-blue-100"></p>
+    <p data-template-id="subtitle-3" class="canva-text text-blue-100"></p>
+   </div>
+  </header><!-- Dark/Light toggle -->
+  <div class="fixed top-4 right-4 z-50"><button id="theme-toggle" class="p-2 rounded-full bg-white/20 backdrop-blur shadow-lg hover:scale-110 transition-transform" aria-label="Toggle dark mode"> <i data-lucide="sun" class="w-5 h-5" id="icon-sun"></i> <i data-lucide="moon" class="w-5 h-5 hidden" id="icon-moon"></i> </button>
+  </div>
+  <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8"><!-- HOME VIEW -->
+   <section id="view-home" class="fade-in fade-in-delay-1">
+    <div class="surface-card rounded-2xl shadow-lg p-8 text-center">
+     <h2 data-template-id="welcome-title" class="canva-text font-bold text-primary mb-4"></h2>
+     <p data-template-id="welcome-desc" class="canva-text text-muted-dynamic mb-8 max-w-2xl mx-auto leading-relaxed"></p>
+     <form id="search-form" class="max-w-md mx-auto"><label for="search-input" class="sr-only">Cari nama</label> <input id="search-input" data-template-id="search-input" type="text" class="canva-input w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none text-lg transition" autocomplete="off"> <button data-template-id="search-button" type="submit" class="canva-button mt-4 w-full py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-blue-800 transition-all hover:shadow-lg"></button>
+     </form>
+    </div><!-- Petunjuk Login -->
+    <div class="surface-card rounded-2xl shadow-lg p-8 mt-6 fade-in fade-in-delay-2">
+     <h3 data-template-id="guide-title" class="canva-text font-bold text-primary mb-4"></h3>
+     <ol class="space-y-2 text-left list-decimal list-inside text-muted-dynamic">
+      <li data-template-id="guide-1" class="canva-text"></li>
+      <li data-template-id="guide-2" class="canva-text"></li>
+      <li data-template-id="guide-3" class="canva-text"></li>
+      <li data-template-id="guide-4" class="canva-text"></li>
+      <li data-template-id="guide-5" class="canva-text"></li>
+      <li data-template-id="guide-6" class="canva-text"></li>
+     </ol>
+    </div>
+   </section><!-- RESULT VIEW -->
+   <section id="view-result" class="hidden">
+    <div class="surface-card rounded-2xl shadow-lg p-8 fade-in">
+     <h2 data-template-id="result-title" class="canva-text font-bold text-primary text-center mb-6"></h2>
+     <div class="space-y-5 max-w-md mx-auto">
+      <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl"><span class="text-2xl">👤</span>
+       <div>
+        <div data-template-id="label-nama" class="canva-text text-sm font-medium text-muted-dynamic"></div>
+        <div id="result-nama" class="font-semibold text-lg"></div>
+       </div>
+      </div>
+      <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl"><span class="text-2xl">👨‍💻</span>
+       <div class="flex-1">
+        <div data-template-id="label-username" class="canva-text text-sm font-medium text-muted-dynamic"></div>
+        <div id="result-username" class="font-semibold text-lg"></div>
+       </div><button onclick="copyText('username')" class="px-3 py-1 text-sm bg-primary text-white rounded-lg hover:bg-blue-800 transition">📋 Salin</button>
+      </div>
+      <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl"><span class="text-2xl">🔑</span>
+       <div class="flex-1">
+        <div data-template-id="label-password" class="canva-text text-sm font-medium text-muted-dynamic"></div>
+        <div class="flex items-center gap-2"><span id="result-password" class="font-semibold text-lg">••••••••</span> <button onclick="togglePassword()" class="text-primary hover:text-blue-800" aria-label="Toggle password">👁</button>
+        </div>
+       </div><button onclick="copyText('password')" class="px-3 py-1 text-sm bg-primary text-white rounded-lg hover:bg-blue-800 transition">📋 Salin</button>
+      </div>
+     </div>
+     <div data-template-id="privacy-warning" class="canva-text mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-center text-sm"></div>
+     <div id="copy-toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg font-medium z-50">
+      Berhasil disalin!
+     </div><button onclick="goHome()" class="mt-6 w-full py-3 border-2 border-primary text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition">⬅ Kembali ke Beranda</button>
+    </div>
+   </section><!-- NOT FOUND VIEW -->
+   <section id="view-notfound" class="hidden">
+    <div class="surface-card rounded-2xl shadow-lg p-8 text-center fade-in">
+     <div class="text-6xl mb-4">
+      😕
+     </div>
+     <h2 data-template-id="notfound-title" class="canva-text font-bold text-primary mb-3"></h2>
+     <p data-template-id="notfound-desc" class="canva-text text-muted-dynamic mb-6"></p><button onclick="goHome()" data-template-id="notfound-button" class="canva-button px-8 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-blue-800 transition"></button>
+    </div>
+   </section><!-- Loading -->
+   <div id="loading" class="hidden fixed inset-0 bg-black/30 flex items-center justify-center z-40">
+    <div class="bg-white rounded-2xl p-8 text-center shadow-2xl">
+     <div class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+     <p class="font-medium text-gray-700">Mencari data...</p>
+    </div>
+   </div>
+  </main><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer bg-primary text-white py-6 px-4 text-center">
+   <p data-template-id="footer-school" class="canva-text font-semibold"></p>
+   <p data-template-id="footer-address" class="canva-text text-blue-100 text-sm mt-1"></p>
+   <p data-template-id="footer-year" class="canva-text text-blue-100 text-sm"></p>
+   <p data-template-id="footer-copy" class="canva-text text-blue-200 text-sm mt-2"></p>
+  </footer>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        lucide.createIcons();
+
+        // Student data - 224 students
+        const students = [
+            { nama: "ABDUL GHANI", username: "2026041", password: "F202600" },
+            { nama: "ABID PUTRA PAMBUDI", username: "2026046", password: "Y202673" },
+            { nama: "Abinaya Raasyid Hanindito", username: "2026148", password: "X202645" },
+            { nama: "ADAM ROBI'USALAM SAIROJI", username: "2026042", password: "Q202690" },
+            { nama: "ADHELLA FALISYA ERBIEY", username: "2026106", password: "X202623" },
+            { nama: "Adia Fathina Ramadhani", username: "2026012", password: "Q202621" },
+            { nama: "ADISTA ASKA SALSABILA", username: "2026179", password: "U202634" },
+            { nama: "ADISTYON PUTERI", username: "2026019", password: "W202662" },
+            { nama: "ADITYA MAULANA ALFARIZKY", username: "2026187", password: "U202644" },
+            { nama: "ADITYA NAUFAL DARY ABIYYU", username: "2026206", password: "N202619" },
+            { nama: "Adizh Abigael", username: "2026109", password: "I202608" },
+            { nama: "AHMAD FATHONI", username: "2026210", password: "B202659" },
+            { nama: "AHMAD NUR ATHIFAR", username: "2026168", password: "C202633" },
+            { nama: "AHMAD OIS AL-HABSYI", username: "2026137", password: "D202622" },
+            { nama: "AINA THALITA ZAHRAN", username: "2026038", password: "X202682" },
+            { nama: "AISYAH KHUMAIRA YUMNA ASYROFINA", username: "2026044", password: "N202681" },
+            { nama: "Akhdan El Azzam", username: "2026087", password: "Q202647" },
+            { nama: "AKHDAN LATIF AZIZAN", username: "2026197", password: "U202621" },
+            { nama: "AKMAL AIDIL AKBAR", username: "2026141", password: "B202696" },
+            { nama: "ALAN ZIDAN CRYSTYANTO", username: "2026125", password: "M202601" },
+            { nama: "ALBY AQILA PRANAJA", username: "2026135", password: "H202666" },
+            { nama: "Alby Lutfy  Nurfahry", username: "2026035", password: "B202674" },
+            { nama: "Al Fata Rahmawati Pramesti", username: "2026150", password: "F202669" },
+            { nama: "Alhisyam Adli Pratama", username: "2026130", password: "R202665" },
+            { nama: "Aliana Cantika", username: "2026195", password: "E202674" },
+            { nama: "ALIFA CAHYAQOLBY RUSDIARA", username: "2026185", password: "N202608" },
+            { nama: "Alifah Salsabila", username: "2026202", password: "E202630" },
+            { nama: "Alinka Khaira Wilda", username: "2026182", password: "Y202609" },
+            { nama: "Alisya Nur Afifah", username: "2026074", password: "J202632" },
+            { nama: "ALKHALIFI AZKA PRASETYA", username: "2026064", password: "O202647" },
+            { nama: "ALVINNO ARYA PRATAMA", username: "2026094", password: "K202664" },
+            { nama: "ALYA ELMYRA SAKHI", username: "2026050", password: "A202633" },
+            { nama: "AMANDA JANETA PUTRI", username: "2026039", password: "W202608" },
+            { nama: "Amir Putra Marazyni", username: "2026093", password: "L202610" },
+            { nama: "AMMAR ABIYYU ABDUL KARIM", username: "2026048", password: "U202687" },
+            { nama: "ANDI MUHAMAD PRASTIYO", username: "2026111", password: "I202644" },
+            { nama: "ANDINI FITRIA SARI", username: "2026103", password: "O202602" },
+            { nama: "ANGGI BELLA OKTAVIANI", username: "2026124", password: "W202658" },
+            { nama: "ANINDITA ZAILA LARASATI", username: "2026127", password: "C202694" },
+            { nama: "ANISA AZZAHRA", username: "2026077", password: "X202604" },
+            { nama: "ANITA RISKY WULANDARI", username: "2026171", password: "Y202625" },
+            { nama: "ANNISA NUR FADHILAH", username: "2026062", password: "O202676" },
+            { nama: "AQILA ALIYA PUTRI", username: "2026212", password: "J202628" },
+            { nama: "AQILA FEBY UFAIRA", username: "2026065", password: "X202666" },
+            { nama: "AQILAH NAZIFA KHAIRUNNISA", username: "2026063", password: "Q202616" },
+            { nama: "Aqila Putri Maheswari", username: "2026221", password: "S202668" },
+            { nama: "AQILA PUTRI SEPTIYANI", username: "2026211", password: "S202650" },
+            { nama: "AQILLA VALENTIA SYAHWA", username: "2026156", password: "R202687" },
+            { nama: "ARDHAN HAFIDZ ALGHOZALI", username: "2026177", password: "D202674" },
+            { nama: "ARDHANI HAFIZ DZAKADITYA", username: "2026175", password: "A202661" },
+            { nama: "ARI SUGIARTO", username: "2026023", password: "D202637" },
+            { nama: "ARNANDO BRIAN FAEYZA", username: "2026092", password: "L202625" },
+            { nama: "ARYA PUTRA RAMDHANI", username: "2026215", password: "Y202675" },
+            { nama: "ASHNA ILAYKA", username: "2026011", password: "V202679" },
+            { nama: "ASNA ATIQAH HANIN", username: "2026059", password: "Q202656" },
+            { nama: "ASRI SULISTYO AJI", username: "2026091", password: "G202624" },
+            { nama: "ASTANINDRA AL GHIFARI", username: "2026084", password: "X202613" },
+            { nama: "ASYILA NAYYA REVINA", username: "2026140", password: "G202651" },
+            { nama: "ATAYA CHIKO JUNIOR", username: "2026113", password: "U202681" },
+            { nama: "ATHARIZZ DHANY HERMAWAN", username: "2026115", password: "Z202666" },
+            { nama: "ATIKA DWINIDA PUTRI", username: "2026095", password: "N202630" },
+            { nama: "ATIKA MEYZA WIJAYA", username: "2026007", password: "O202656" },
+            { nama: "AUDREY MULYA PRANANDA SEKARWANGI", username: "2026022", password: "Y202688" },
+            { nama: "AULIA DWI RAHMAWATI", username: "2026112", password: "C202623" },
+            { nama: "AYNA CAHYANI", username: "2026146", password: "M202671" },
+            { nama: "AZAKI EGA LUTFIAN", username: "2026056", password: "L202660" },
+            { nama: "AZKA ALVARO IRAWAN", username: "2026009", password: "E202666" },
+            { nama: "Azrael Hizkia Christnandhito", username: "2026183", password: "D202609" },
+            { nama: "Azzahra Nur Afifah", username: "2026159", password: "L202686" },
+            { nama: "Az Zahra Nurul An Nisa", username: "2026037", password: "H202640" },
+            { nama: "Az Zahra Roffi Adiibah", username: "2026040", password: "H202608" },
+            { nama: "AZZELIA VERINA PUTRI KHALISA", username: "2026157", password: "H202613" },
+            { nama: "BAGOES ANINDYA RAMADHAN", username: "2026028", password: "B202664" },
+            { nama: "BAGUS PRADIPTA TOLEDO", username: "2026134", password: "J202637" },
+            { nama: "BILQIS AULIA PUTRI PRABOWO", username: "2026133", password: "H202683" },
+            { nama: "BINTANG RIZKY PRATAMA", username: "2026188", password: "B202674" },
+            { nama: "Cantika Juliana Siyami", username: "2026193", password: "D202667" },
+            { nama: "Daffa Arya Ghossan", username: "2026031", password: "W202610" },
+            { nama: "DAFFA LUTFY FACHRY", username: "2026069", password: "O202685" },
+            { nama: "DAMARA MIKAELA ANGEL", username: "2026025", password: "A202687" },
+            { nama: "DAMAR MAULANA", username: "2026192", password: "Q202635" },
+            { nama: "DAMAR RAMDHAN ARZAKI", username: "2026005", password: "S202606" },
+            { nama: "DEBY AZZAHRA SALWA PUTRI", username: "2026054", password: "Q202670" },
+            { nama: "DEFA MAULANA PRASTYA", username: "2026002", password: "R202676" },
+            { nama: "DENANDA BILKIS PUTRI ARTRI", username: "2026147", password: "X202642" },
+            { nama: "DESTAMA MAHARDIKA", username: "2026072", password: "Y202692" },
+            { nama: "DEVAN ALVARO HERNAWAN", username: "2026068", password: "C202631" },
+            { nama: "DIMAS HADI WIJAYA", username: "2026014", password: "Q202659" },
+            { nama: "Dinda Aulia Syahfitri", username: "2026052", password: "V202682" },
+            { nama: "DIVA ANGGUN PRATIWI", username: "2026222", password: "M202640" },
+            { nama: "ECA SALSABILA KIRANA", username: "2026170", password: "F202639" },
+            { nama: "EGA APRILIO SURYA SAPUTRA", username: "2026117", password: "M202611" },
+            { nama: "EKA NUR SAPUTRI", username: "2026162", password: "B202661" },
+            { nama: "ELENA TITO", username: "2026016", password: "O202659" },
+            { nama: "ELISYA ZUHRI YULISTIANI", username: "2026123", password: "A202674" },
+            { nama: "Elmalia Hera", username: "2026006", password: "L202639" },
+            { nama: "ESA SYAFA ADZKYA", username: "2026024", password: "Y202633" },
+            { nama: "EXCEL ZIGGY SAVIERO", username: "2026118", password: "Z202632" },
+            { nama: "FACHRIASTA USWAH HARIMURTI", username: "2026053", password: "B202667" },
+            { nama: "FAEYZA AKMAL IBRAHIM", username: "2026129", password: "B202618" },
+            { nama: "FAHRI MUHAMAD SAFI'I", username: "2026186", password: "S202695" },
+            { nama: "FAMELA NUR UTAMI", username: "2026208", password: "L202601" },
+            { nama: "FAREL ZAKI EFENDI", username: "2026088", password: "L202633" },
+            { nama: "FATAN ADJI PAMUNGKAS", username: "2026207", password: "M202619" },
+            { nama: "Fatih Rayhan Aziz", username: "2026015", password: "V202689" },
+            { nama: "FATTAN SAFARAZ BUDIHANTO", username: "2026114", password: "T202698" },
+            { nama: "FAUZI NUR HIDAYAT", username: "2026161", password: "J202601" },
+            { nama: "FEANRAMOERRA AFIDA", username: "2026105", password: "F202685" },
+            { nama: "FEBRIANA RAHAYU", username: "2026020", password: "A202614" },
+            { nama: "FERLYN SYAQILA ASYHA", username: "2026204", password: "W202665" },
+            { nama: "FRICILLA PUTRI DWIYANA", username: "2026132", password: "O202630" },
+            { nama: "GAIN ADINA RASHIDA", username: "2026021", password: "J202601" },
+            { nama: "GANDIS DWI SAPUTRI", username: "2026181", password: "T202699" },
+            { nama: "GIAN ADITYA ARDHANI", username: "2026070", password: "O202697" },
+            { nama: "Grace Afifa Fitiya", username: "2026102", password: "B202633" },
+            { nama: "GRISELDA GLENYS AYUNDA", username: "2026196", password: "A202671" },
+            { nama: "GUGUN MAULANA SAPUTRA", username: "2026194", password: "R202614" },
+            { nama: "HABIBAH UMMU HASANAH", username: "2026060", password: "L202677" },
+            { nama: "HAFIDZ HASSANUDIEN ARSYAD", username: "2026032", password: "C202629" },
+            { nama: "HANA SABRINA LITAHAYU", username: "2026126", password: "L202632" },
+            { nama: "HERMAWAN BAGUS AJI", username: "2026158", password: "C202639" },
+            { nama: "IBRAHIM PUTRA PAMUNGKAS", username: "2026145", password: "T202631" },
+            { nama: "IGOLDA KRISTIANO BERNADIN", username: "2026108", password: "U202688" },
+            { nama: "Indah Octaviani Fadiyah", username: "2026029", password: "E202628" },
+            { nama: "Inggrid Bening Cahaya", username: "2026173", password: "R202649" },
+            { nama: "ISMI MARFUAH", username: "2026089", password: "B202668" },
+            { nama: "JAGAD PINAJAR MAHAADIATMA", username: "2026018", password: "P202688" },
+            { nama: "JAZMIKA CANDRA AS TUTI", username: "2026047", password: "J202612" },
+            { nama: "JENIVER L VELENCYA AICHO", username: "2026049", password: "S202630" },
+            { nama: "JERO NUGROHO", username: "2026213", password: "Y202618" },
+            { nama: "Kaira Nur Azizah", username: "2026075", password: "I202641" },
+            { nama: "KAISA ELHAN LAILAFIRDAUS", username: "2026149", password: "X202684" },
+            { nama: "KARISMA SUCI", username: "2026057", password: "W202698" },
+            { nama: "KAYLA ALA'ISYA BERLIAN", username: "2026172", password: "Q202636" },
+            { nama: "KAYSHA PUTRI ARLIN", username: "2026055", password: "A202640" },
+            { nama: "KENES BATARIHAYU MAHARSITO", username: "2026066", password: "V202698" },
+            { nama: "Keylen Mareta Anjani", username: "2026155", password: "U202672" },
+            { nama: "Kholifah Nur Laily", username: "2026128", password: "J202682" },
+            { nama: "KYNATHA ZAHRATU NIDA", username: "2026026", password: "H202693" },
+            { nama: "LINTANG PUTRI HAPSARI", username: "2026107", password: "Z202609" },
+            { nama: "LUQMAN DZAKY ALMAIR", username: "2026223", password: "I202680" },
+            { nama: "MAHADRI DEMAS AL GIBRAN", username: "2026121", password: "Z202678" },
+            { nama: "MAHESWARA AJIVA SAPUTRA", username: "2026164", password: "W202641" },
+            { nama: "MEGHAN ERLANO", username: "2026120", password: "L202607" },
+            { nama: "Meisya Siar As Sidiq", username: "2026017", password: "U202634" },
+            { nama: "MELYNA ZAHRATU NIDA", username: "2026030", password: "Q202601" },
+            { nama: "MICHELLA ALYA SAFIQHA", username: "2026061", password: "T202682" },
+            { nama: "MIEKO CINTA MAHESTRI", username: "2026131", password: "B202618" },
+            { nama: "Mizael Hizkia Christnandhito", username: "2026004", password: "C202635" },
+            { nama: "Muhammad Aufar Musthafa", username: "2026045", password: "P202617" },
+            { nama: "MUHAMMAD DAFFA ARDIANSYAH", username: "2026169", password: "B202692" },
+            { nama: "MUHAMMAD RIZKY ARYA PRATAMA", username: "2026082", password: "B202645" },
+            { nama: "MUHAMMAD RIZKY HENGKY PRADANA", username: "2026136", password: "Z202608" },
+            { nama: "Muhammad Yusuf Ibrahim", username: "2026110", password: "L202643" },
+            { nama: "MUTIARA KAIRUNNISA LARASATI", username: "2026099", password: "K202621" },
+            { nama: "NABIHAN PUTRA HARTANDRA", username: "2026143", password: "Q202650" },
+            { nama: "NADHIFA SALSABILA HERVIANY", username: "2026098", password: "T202626" },
+            { nama: "NADIPA JUANATA", username: "2026174", password: "Q202600" },
+            { nama: "NADIYA MAULIDA HUSNA", username: "2026122", password: "Y202675" },
+            { nama: "Najwa Fazilla Alfaiqah", username: "2026003", password: "P202635" },
+            { nama: "NAKHILLA SEKAR RAMADHANI", username: "2026051", password: "A202617" },
+            { nama: "NASYA ADELIA HANIFAH", username: "2026010", password: "L202693" },
+            { nama: "NASYA FIORENZA AURORA", username: "2026198", password: "A202660" },
+            { nama: "NATASYA KHAIRUNNISA", username: "2026096", password: "H202655" },
+            { nama: "NAUFAL RASYDAN AHNAF", username: "2026214", password: "K202604" },
+            { nama: "NAURA INAYA RAFA", username: "2026154", password: "C202697" },
+            { nama: "NAURA NURMAYA RAHMADHANI", username: "2026101", password: "B202679" },
+            { nama: "NAYLA ALVIENA", username: "2026152", password: "H202670" },
+            { nama: "NESYA FIORENZA AURORA", username: "2026201", password: "E202605" },
+            { nama: "NEYLA MOZHA AZ ZAHRA", username: "2026203", password: "W202604" },
+            { nama: "NINDYA ALLWA YULIANI", username: "2026176", password: "Z202621" },
+            { nama: "NINO ADITYA PAMUNGKAS", username: "2026079", password: "O202654" },
+            { nama: "NUHA AFIFAH ARMANTYA", username: "2026163", password: "Y202683" },
+            { nama: "NUMA AFIFAH ARMANTYA", username: "2026116", password: "F202659" },
+            { nama: "NURRAHMA EKA DWI ARYANI", username: "2026180", password: "X202637" },
+            { nama: "ODILIA KEIYA AILANI", username: "2026100", password: "U202686" },
+            { nama: "PURI KINANTI PRABANALA", username: "2026165", password: "I202683" },
+            { nama: "RAFARDHAN AUFANDARREL ATHALLA", username: "2026190", password: "I202651" },
+            { nama: "Raihana Anivia", username: "2026153", password: "N202670" },
+            { nama: "RAISSA BELVINA NOVANT KIRANA", username: "2026166", password: "U202696" },
+            { nama: "Rasya Heppy Destiana", username: "2026097", password: "K202661" },
+            { nama: "REIHAN ADHITYA", username: "2026216", password: "K202672" },
+            { nama: "REYZA AURELIA AZAHRA", username: "2026067", password: "P202639" },
+            { nama: "RIFAI JAKARIA ADI LUHUNG", username: "2026220", password: "R202662" },
+            { nama: "RIFKI CHAIRUL NURROZI", username: "2026178", password: "Y202644" },
+            { nama: "Rifqi Noviansah", username: "2026205", password: "Q202669" },
+            { nama: "RIZKY ZAKIATHA", username: "2026119", password: "F202630" },
+            { nama: "Roihan Adillah Pratama", username: "2026209", password: "D202669" },
+            { nama: "SALMA AZZAHRA", username: "2026058", password: "S202635" },
+            { nama: "SALMA ZAHRA RATIFA", username: "2026083", password: "A202618" },
+            { nama: "SALWA AZZAHRA", username: "2026034", password: "W202681" },
+            { nama: "SANAFREA AULIA MEYTHESYA", username: "2026104", password: "L202601" },
+            { nama: "SARAH LEILA LATHIFAH", username: "2026073", password: "K202626" },
+            { nama: "SATRIA AJI NUGROHO", username: "2026085", password: "X202622" },
+            { nama: "SATRIA PUTRA WIJAYA", username: "2026189", password: "J202698" },
+            { nama: "SEFTIANA EKA PUTRI", username: "2026217", password: "N202628" },
+            { nama: "SEKAR AYU LARASATI", username: "2026080", password: "M202699" },
+            { nama: "SEKAR KINASIH ASHILA", username: "2026144", password: "G202696" },
+            { nama: "SHAFA LEVINA ORDELIA", username: "2026008", password: "B202615" },
+            { nama: "SHAKILA ANINDYA MAHESWARI", username: "2026076", password: "X202641" },
+            { nama: "SHAQILA CITRA SABRINA", username: "2026184", password: "M202624" },
+            { nama: "SHOFIE SALSABILA JAYADI", username: "2026138", password: "D202607" },
+            { nama: "STEVANI CALISTA PUTRI", username: "2026218", password: "Q202648" },
+            { nama: "VANESSA AERYLIN BELVANIA ADI", username: "2026081", password: "P202629" },
+            { nama: "VERA ANANDA", username: "2026191", password: "R202697" },
+            { nama: "vina naillatul izzah", username: "2026090", password: "E202670" },
+            { nama: "VIOLLA KHANZA SAHNA", username: "2026027", password: "Z202645" },
+            { nama: "VIRMAN MAULANA", username: "2026200", password: "J202657" },
+            { nama: "Wa Alda Ektyando", username: "2026151", password: "Y202661" },
+            { nama: "WILDAN GONIA PRATAMA", username: "2026036", password: "M202662" },
+            { nama: "YOGA TRI NUGROHO", username: "2026167", password: "X202629" },
+            { nama: "Yoga Za'iim Zakii Akbar", username: "2026013", password: "R202607" },
+            { nama: "YOHANA KRISTANTI", username: "2026001", password: "U202600" },
+            { nama: "YOSEF FEBRIANTO", username: "2026139", password: "Z202612" },
+            { nama: "YUCI KAYLEE KAYIMA", username: "2026071", password: "M202611" },
+            { nama: "ZAHIRA AKILA KHAIRANI", username: "2026199", password: "B202690" },
+            { nama: "ZAHWA ALIFA WIBOWO", username: "2026160", password: "H202616" },
+            { nama: "Zaila Nurul Jannah", username: "2026086", password: "J202660" },
+            { nama: "ZAINA LIVIANA RAMADHANI", username: "2026224", password: "Z202606" },
+            { nama: "ZASKIA SYIFA AZ ZAHRA", username: "2026078", password: "F202694" },
+            { nama: "ZHINDY ANGGRAINI", username: "2026219", password: "T202630" },
+            { nama: "ZIYFA WIDYANINGRUM", username: "2026142", password: "S202678" },
+            { nama: "ZULFANIA AZZAHRA", username: "2026043", password: "A202644" },
+            { nama: "ZULLAIKHA AZ ZAHRA", username: "2026033", password: "N202626" }
+        ];
+
+        let currentStudent = null;
+        let passwordVisible = false;
+
+        // Theme
+        const body = document.body;
+        const toggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.classList.toggle('dark-mode', savedTheme === 'dark');
+        body.classList.toggle('light-mode', savedTheme === 'light');
+        document.getElementById('icon-moon').classList.toggle('hidden', savedTheme === 'light');
+        document.getElementById('icon-sun').classList.toggle('hidden', savedTheme === 'dark');
+
+        toggle.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-mode');
+            body.classList.toggle('dark-mode', !isDark);
+            body.classList.toggle('light-mode', isDark);
+            document.getElementById('icon-sun').classList.toggle('hidden', !isDark);
+            document.getElementById('icon-moon').classList.toggle('hidden', isDark);
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Search
+        document.getElementById('search-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = document.getElementById('search-input').value.trim().toLowerCase();
+            if (!query) return;
+
+            document.getElementById('loading').classList.remove('hidden');
+
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+                const found = students.find(s => s.nama.toLowerCase().includes(query));
+
+                if (found) {
+                    currentStudent = found;
+                    passwordVisible = false;
+                    document.getElementById('result-nama').textContent = found.nama;
+                    document.getElementById('result-username').textContent = found.username;
+                    document.getElementById('result-password').textContent = '••••••••';
+                    showView('view-result');
+                } else {
+                    showView('view-notfound');
+                }
+            }, 800);
+        });
+
+        function showView(id) {
+            ['view-home', 'view-result', 'view-notfound'].forEach(v => {
+                document.getElementById(v).classList.toggle('hidden', v !== id);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            document.getElementById('search-input').value = '';
+            showView('view-home');
+        }
+
+        function togglePassword() {
+            passwordVisible = !passwordVisible;
+            document.getElementById('result-password').textContent = passwordVisible ? currentStudent.password : '••••••••';
+        }
+
+        function copyText(type) {
+            const text = type === 'username' ? currentStudent.username : currentStudent.password;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2000);
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1207911d1665f41',t:'MTc4MjUyMTU4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
